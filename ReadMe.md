@@ -1,5 +1,10 @@
 # GDL api-documentation
 
+# Security
+The api-documentation is open for all, but some endpoints are secured with OAuth2 through Auth0. To get access, click the Authorize-button and log in. Then send an email to auth@digitallibrary.io and request access.
+
+# Development
+
 ## Requirements
 
 - Node.JS ~6.2
