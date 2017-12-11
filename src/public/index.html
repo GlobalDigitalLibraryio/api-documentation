@@ -41,12 +41,13 @@
               onComplete: function(swaggerApi, swaggerUi){
                   if(typeof initOAuth == "function") {
                       initOAuth({
-                          clientId: "gdl-swagger-client-id",
-                          clientSecret: "gdl-swagger-public-client-secret",
+                          clientId: "Hf3lgXrS71nxiiEaHAyRZ3GncgeE2pq5",
                           realm: "gdl-realm",
                           appName: "gdl-swagger",
                           scopeSeparator: " ",
-                          additionalQueryStringParams: {}
+                          additionalQueryStringParams: {
+                            audience: "gdl_system"
+                          }
                       });
                   }
                 $('pre code').each(function(i, e) {
@@ -57,7 +58,7 @@
                 console.log("Unable to Load SwaggerUI");
               },
               docExpansion: "list",
-              sorter : "alpha"
+              apisSorter : "alpha"
             });
 
             $('#input_apiKey').change(function() {
@@ -81,12 +82,6 @@
 </div>
 <div id='blue_bar'>
     <div id='beta'>*** BETA ***</div>
-</div>
-<div id='credentials_block'>
-    <p id="credentials">
-        <span class="label">ClientId: </span>swagger-client
-        <span class="label">Secret: </span>swagger-public-client-secret
-    </p>
 </div>
 <div id='auth_block'>
     <div id='auth_container'></div>
