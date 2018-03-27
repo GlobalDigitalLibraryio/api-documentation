@@ -9,7 +9,28 @@
 import fetch from 'isomorphic-fetch';
 import { apiResourceUrl, resolveJsonOrRejectWithError } from '../utils/apiHelpers';
 
-export function fetchApis(method = 'GET') {
-  const url = apiResourceUrl('/apis');
+function fetchRoutes(method = 'GET') {
+  const url = apiResourceUrl('/routes');
   return fetch(url, { method }).then(resolveJsonOrRejectWithError);
+}
+
+function fetchServices(method = 'GET') {
+  const url = apiResourceUrl('/services')
+  return fetch(url, { method }).then(resolveJsonOrRejectWithError);
+}
+
+export async function fetchApis(method = 'GET') {
+    const [routes, services] = await Promise.all([fetchRoutes(), fetchServices()]);
+    routes.data.forEach((route) => {
+      services.data.forEach((service) => {
+        if(service.id == route.service.id) {
+          try {
+            route.service.name = service.name;
+          } catch (e) {
+            console.log(e)
+          }
+        }
+      });
+    });
+    return routes;
 }
