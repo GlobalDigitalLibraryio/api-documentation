@@ -1,7 +1,7 @@
- import httpStaus from 'http-status';
- import config from '../config';
+import httpStaus from 'http-status';
+import config from '../config';
 
- export const htmlTemplate = body =>
+export const htmlTemplate = body =>
   `<!doctype html>\n<html lang='nb' >
     <head>
       <meta charset="utf-8">
@@ -21,29 +21,29 @@
     </body>
   </html>`;
 
- export const apiDocsUri = (apiObj) => {
-   for (const uri of apiObj.uris) {
-     if (config.apiDocPath.test(uri)) {
-       return uri;
-     }
-   }
-   return undefined;
- };
+export const apiDocsUri = (apiObj) => {
+  for (const uri of apiObj.paths) {
+    if (config.apiDocPath.test(uri)) {
+      return uri;
+    }
+  }
+  return undefined;
+};
 
  export const apiListTemplate = (items) => {
    const listItems = items.map(obj =>
-     `<li><a href="/swagger?url=${apiDocsUri(obj)}">${obj.name.replace('-open', '')}</a></li>`
-   );
+     `<li><a href="/swagger?url=${apiDocsUri(obj)}">${obj.service.name}</a></li>`
+  );
 
-   return htmlTemplate(listItems.join(''));
- };
+  return htmlTemplate(listItems.join(''));
+};
 
- export const htmlErrorTemplate = ({ status, message, description, stacktrace }) => {
-   const statusMsg = httpStaus[status];
-   return htmlTemplate('nb', `
+export const htmlErrorTemplate = ({ status, message, description, stacktrace }) => {
+  const statusMsg = httpStaus[status];
+  return htmlTemplate('nb', `
     <h1>${status} ${statusMsg}</h1>
     <div><b>Message: </b>${message}</div>
     <div><b>Description: </b>${description}</div>
     <div>${stacktrace}</div>
   `);
- };
+};
