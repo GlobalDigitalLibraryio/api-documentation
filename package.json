@@ -48,5 +48,5 @@
   },
   "homepage": "https://github.com/GlobalDigitalLibraryio/api-documentation",
   "author": "gdl@knowit.no",
-  "license": "GPL-3.0"
+  "license": "Apache-2.0"
 }
